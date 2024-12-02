@@ -26,6 +26,17 @@ variable "duration" {
   }
 }
 
+variable "action" {
+  description = "define action"
+  type = string
+  nullable = false
+
+  validation {
+    condition = !contains(["*"], var.action)
+    error_message = "Do not use *"
+  }
+}
+
 # variable "session-time" {
 #   description = ""
 # #  default = timeadd(timestamp(), var.duration)

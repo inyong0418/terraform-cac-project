@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "cac-policy" {
     sid = "1"
 
     actions = [
-      "s3:PutObject",
+      "${var.action}:PutObject",
     ]
 
     resources = [
