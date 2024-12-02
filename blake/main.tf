@@ -20,7 +20,7 @@ provider "aws" {
   default_tags {
     tags = {
       name        = "${var.user-id[0]}-iam-policy"
-      role = var.user-id
+      role = var.user-id[0]
     }
   }
 }
