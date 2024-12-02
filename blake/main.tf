@@ -19,8 +19,8 @@ provider "aws" {
   region = var.region
   default_tags {
     tags = {
-      name        = "${var.user-id[0]}-iam-policy"
-      role = var.user-id[0]
+      name        = "${var.user-id}-iam-policy"
+      role = var.user-id
     }
   }
 }
@@ -58,7 +58,7 @@ data "aws_iam_policy_document" "cac-policy" {
 }
 
 resource "aws_iam_policy" "cac-policy" {
-  name     = "${var.user-id[0]}-policy"
+  name     = "${var.user-id}-policy"
   policy = data.aws_iam_policy_document.cac-policy.json
 }
 
