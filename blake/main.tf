@@ -27,6 +27,7 @@ provider "aws" {
 
 locals {
   session = timeadd(timestamp(), join("",[var.duration, "h"]))
+  cac_account = "851725357209"
 }
 
 data "aws_iam_policy_document" "cac-policy" {
@@ -45,7 +46,7 @@ data "aws_iam_policy_document" "cac-policy" {
     condition {
       test     = "StringLike"
       variable = "aws:userid"
-      values   = ["*:${var.user-id}"]
+      values   = ["${local.cac_account}:${var.user-id}"]
     }
 #
     condition {
