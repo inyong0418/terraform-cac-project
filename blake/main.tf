@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "cac-policy" {
     condition {
       test     = "StringLike"
       variable = "aws:userid"
-      values   = ["${local.cac_account}:${var.user-id}"]
+      values   = ["*:${var.user-id}"]
     }
 #
     condition {
