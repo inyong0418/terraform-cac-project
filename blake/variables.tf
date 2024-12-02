@@ -19,16 +19,16 @@ variable "duration" {
   default = 2
   type = number
   nullable = false
-}
-
-variable "session-time" {
-  description = ""
-  default = timeadd(timestamp(), var.duration)
-  type = string
-  nullable = false
 
   validation {
     condition = (var.duration) > 2
     error_message = "Do not use *"
   }
 }
+
+# variable "session-time" {
+#   description = ""
+# #  default = timeadd(timestamp(), var.duration)
+#   type = string
+#   nullable = false
+# }
