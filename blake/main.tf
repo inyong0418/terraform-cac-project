@@ -26,7 +26,7 @@ provider "aws" {
 }
 
 locals {
-  session = timeadd(timestamp(), var.duration)
+  session = timeadd(timestamp(), var.duration + "h")
 }
 
 data "aws_iam_policy_document" "cac-policy" {
