@@ -14,13 +14,21 @@ variable "user-id" {
   }
 }
 
+variable "duration" {
+  description = "session duration"
+  default = 2
+  type = number
+  nullable = false
+}
+
 variable "session-time" {
   description = ""
+  default = timeadd(timestamp(), var.duration)
   type = string
   nullable = false
 
   validation {
-    condition = (var.session-time - timestamp()) > 2
+    condition = (var.duration) > 2
     error_message = "Do not use *"
   }
 }
