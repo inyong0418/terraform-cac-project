@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "cac-policy" {
       variable = "aws:userid"
       values   = ["*:${var.user-id}"]
     }
-#
+
     condition {
       test     = "DateLessThan"
       variable = "aws:CurrentTime"
