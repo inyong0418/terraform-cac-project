@@ -5,7 +5,7 @@ variable "region" {
 
 variable "user-id" {
   description = "User ID for restrict"
-  type = list
+  type = string
   nullable = false
 
   validation {
