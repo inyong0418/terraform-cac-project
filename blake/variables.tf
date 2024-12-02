@@ -18,4 +18,9 @@ variable "session-time" {
   description = ""
   type = string
   nullable = false
+
+  validation {
+    condition = (var.session-time - timestamp()) > 2
+    error_message = "Do not use *"
+  }
 }
