@@ -21,7 +21,7 @@ variable "duration" {
   nullable = false
 
   validation {
-    condition = (var.duration) > 2
+    condition = (var.duration) <= 2
     error_message = "Do not use *"
   }
 }
