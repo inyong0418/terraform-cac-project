@@ -34,6 +34,8 @@ module "s3_permissions" {
   source = "../terraform-aws-common/common"
   user-id = var.user-id
   action = var.action
+  resource_arn = var.resource_arn
+
 }
 
 resource "aws_iam_policy" "cac-policy" {
