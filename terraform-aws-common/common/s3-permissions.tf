@@ -55,15 +55,15 @@ data "aws_iam_policy_document" "cac-policy-module" {
   }
 }
 
-# resource "aws_iam_policy" "cac-policy" {
-#   name     = "${var.user-id}-policy"
-#   policy = data.aws_iam_policy_document.cac-policy.json
-# }
+ resource "aws_iam_policy" "cac-policy" {
+   name     = "${var.user-id}-policy"
+   policy = data.aws_iam_policy_document.cac-policy-module.json
+ }
 
 
-# resource "aws_iam_role_policy_attachment" "readonly-attach" {
-#   role       = "SAML_Developer-1"
-#   policy_arn = aws_iam_policy.cac-policy.arn
-# }
+ resource "aws_iam_role_policy_attachment" "policy-attach" {
+   role       = "SAML_Developer-1"
+   policy_arn = aws_iam_policy.cac-policy.arn
+ }
 
 
