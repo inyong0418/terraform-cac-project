@@ -33,6 +33,9 @@ locals {
 module "s3_permissions" {
   source = "../terraform-aws-common/common"
 
+  user-id = var.user-id
+  action = var.action
+  cmdb-role = var.cmdb_role
 }
 
 resource "aws_iam_policy" "cac-policy" {
