@@ -29,7 +29,7 @@ provider "aws" {
 #   session = timeadd(timestamp(), join("",[var.duration, "h"]))
 #   cac_account = "851725357209"
 # }
-#
+
 module "s3_permissions" {
   source = "../terraform-aws-common/common"
   user-id = var.user-id
