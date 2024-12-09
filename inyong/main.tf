@@ -30,31 +30,9 @@ locals {
   cac_account = "851725357209"
 }
 
-data "aws_iam_policy_document" "cac-policy" {
-  statement {
-    sid = "1"
+module "s3_permissions" {
+  source = "../terraform-aws-common/common"
 
-    actions = [
-      "${var.action}:PutObject",
-    ]
-
-    resources = [
-        "arn:aws:s3:::blake-test-1234567",
-        "arn:aws:s3:::blake-test-1234567/*",
-    ]
-
-    condition {
-      test     = "StringLike"
-      variable = "aws:userid"
-      values   = ["*:${var.user-id}"]
-    }
-#
-    condition {
-      test     = "DateLessThan"
-      variable = "aws:CurrentTime"
-      values   = ["${local.session}"]
-    }
-  }
 }
 
 resource "aws_iam_policy" "cac-policy" {

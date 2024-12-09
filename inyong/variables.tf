@@ -37,6 +37,16 @@ variable "action" {
   }
 }
 
+variable "resource_arn" {
+  description = "s3-resource-arn"
+  type = list(object({
+    s3_bucket_arn = string
+    s3_access_point_arn = string
+  }))
+  default = []
+}
+
+
 # variable "session-time" {
 #   description = ""
 # #  default = timeadd(timestamp(), var.duration)
