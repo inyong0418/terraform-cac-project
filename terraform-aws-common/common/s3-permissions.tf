@@ -7,13 +7,13 @@ terraform {
 #      name = "terraform-aws-tfc-workflow"
 #    }
 #  }
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
-}
+#   required_providers {
+#     aws = {
+#       source  = "hashicorp/aws"
+#       version = "~> 5.0"
+#     }
+#   }
+# }
 
 # provider "aws" {
 #   region = var.region
@@ -24,12 +24,12 @@ terraform {
 #   }
 # }
 
-# locals {
-#   session = timeadd(timestamp(), join("",[var.duration, "h"]))
-#   cac_account = "851725357209"
-# }
+ locals {
+   session = timeadd(timestamp(), join("",[var.duration, "h"]))
+   cac_account = "851725357209"
+ }
 
-data "aws_iam_policy_document" "cac-policy" {
+data "aws_iam_policy_document" "cac-policy-1" {
   statement {
     sid = "1"
 
