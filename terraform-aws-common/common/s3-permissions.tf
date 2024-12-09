@@ -35,7 +35,7 @@ data "aws_iam_policy_document" "cac-policy-module" {
     actions = [
       var.action,
     ]
-
+#
     resources = [
         "arn:aws:s3:::${var.resource_arn}",
         "arn:aws:s3:::${var.resource_arn}/*",
