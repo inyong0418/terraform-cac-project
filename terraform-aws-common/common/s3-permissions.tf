@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "cac-policy-module" {
   }
 }
 
- resource "aws_iam_policy" "cac-policy" {
+ resource "aws_iam_policy" "cac-policy-module" {
    name     = "${var.user-id}-policy"
    policy = data.aws_iam_policy_document.cac-policy-module.json
  }
@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "cac-policy-module" {
 
  resource "aws_iam_role_policy_attachment" "policy-attach" {
    role       = "SAML_Developer-1"
-   policy_arn = aws_iam_policy.cac-policy.arn
+   policy_arn = aws_iam_policy.cac-policy-module.arn
  }
 
 
