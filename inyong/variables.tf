@@ -46,6 +46,14 @@ variable "resource_arn" {
   default = []
 }
 
+variable "cmdb_role" {
+  description = "cmdb role"
+  type = string
+    nullable = false
+
+}
+
+
 
 # variable "session-time" {
 #   description = ""
