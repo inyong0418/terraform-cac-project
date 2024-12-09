@@ -1,45 +1,70 @@
+terraform {
+#  cloud {
+#    organization = "cac-org"
+#    hostname     = "app.terraform.io" # default
 
-locals {
-    std_perms_s3_resources = flatten([
-        [for s3_bucket in var.perms_s3 : [s3_bucket["s3_bucket_arn"], "${s3_bucket["s3_bucket_arn"]}/*"] if lookup(s3_bucket, "s3_bucket_arn", null) != null],
-        [for s3_bucket in var.perms_s3 : [s3_bucket["s3_access_point_arn"], "${s3_bucket["s3_access_point_arn"]}/*"] if lookup(s3_bucket, "s3_access_point_arn", null) != null]
-    ])
-
-    create_std_perms_policy = anytrue(
-        length(var.var.perms_s3) > 0,
-    )
-}
-
-resource "random_string" "std_perms_s3_policy_sid_suffix" {
-    count = 3
-    length = 10
-    special = false
-    upper = false
-    lower = false
-}
-
-data "aws_iam_policy_document" "std_perms" {
-    dynamic "statement" {
-        for_each = length(var.perms_s3) > 0 ? [""] : []
-        content {
-          sid = "CAC Reference PolicyIDs${random_string.std_perms_s3_policy_sid_suffix[0].id}"
-          effect = "Allow"
-          actions = [
-            "s3:List*",
-            "s3:HeadBucket",
-          ]
-          resources = ["*"]
-        }
+#    workspaces {
+#      name = "terraform-aws-tfc-workflow"
+#    }
+#  }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
-    dynamic "statement" {
-        for_each = length(var.perms_s3) > 0 ? [""] : []
-        content {
-          sid = "CAC Reference PolicyIDs${random_string.std_perms_s3_policy_sid_suffix[1].id}"
-          effect = "Allow"
-          actions = [
-            "s3:PutObjet",
-          ]
-          resources = local.std_perms_s3_resources
-        }
-    }
+  }
 }
+
+# provider "aws" {
+#   region = var.region
+#   default_tags {
+#     tags = {
+#       role = var.cmdb-role
+#     }
+#   }
+# }
+
+# locals {
+#   session = timeadd(timestamp(), join("",[var.duration, "h"]))
+#   cac_account = "851725357209"
+# }
+
+data "aws_iam_policy_document" "cac-policy" {
+  statement {
+    sid = "1"
+
+    actions = [
+      var.action,
+    ]
+
+    resources = [
+        "arn:aws:s3:::${var.resource_arn}",
+        "arn:aws:s3:::${var.resource_arn}/*",
+    ]
+
+    condition {
+      test     = "StringLike"
+      variable = "aws:userid"
+      values   = ["*:${var.user-id}"]
+    }
+#
+    condition {
+      test     = "DateLessThan"
+      variable = "aws:CurrentTime"
+      values   = ["${local.session}"]
+    }
+  }
+}
+
+# resource "aws_iam_policy" "cac-policy" {
+#   name     = "${var.user-id}-policy"
+#   policy = data.aws_iam_policy_document.cac-policy.json
+# }
+
+
+# resource "aws_iam_role_policy_attachment" "readonly-attach" {
+#   role       = "SAML_Developer-1"
+#   policy_arn = aws_iam_policy.cac-policy.arn
+# }
+
+
