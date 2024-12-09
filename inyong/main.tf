@@ -38,7 +38,7 @@ module "s3_permissions" {
   cmdb-role = var.cmdb_role
 
 }
-
+#
 # resource "aws_iam_policy" "cac-policy" {
 #   name     = "${var.user-id}-policy"
 #   policy = data.aws_iam_policy_document.cac-policy.json
