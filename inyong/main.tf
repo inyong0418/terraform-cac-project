@@ -24,7 +24,7 @@ provider "aws" {
     }
   }
 }
-
+#
 locals {
   session = timeadd(timestamp(), join("",[var.duration, "h"]))
   cac_account = "851725357209"
@@ -32,7 +32,6 @@ locals {
 
 module "s3_permissions" {
   source = "../terraform-aws-common/common"
-
   user-id = var.user-id
   action = var.action
 }
