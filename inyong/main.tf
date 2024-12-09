@@ -35,6 +35,7 @@ module "s3_permissions" {
   user-id = var.user-id
   action = var.action
   resource_arn = var.resource_arn
+  cmdb-role = var.cmdb_role
 
 }
 
