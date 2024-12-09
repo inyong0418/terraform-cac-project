@@ -20,7 +20,7 @@ provider "aws" {
   default_tags {
     tags = {
       name        = "${var.user-id}-iam-policy"
-      role = var.user-id
+      role = var.cmdb_role
     }
   }
 }
@@ -35,7 +35,6 @@ module "s3_permissions" {
 
   user-id = var.user-id
   action = var.action
-  cmdb-role = var.cmdb_role
 }
 
 resource "aws_iam_policy" "cac-policy" {
