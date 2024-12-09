@@ -19,8 +19,7 @@ provider "aws" {
   region = var.region
   default_tags {
     tags = {
-      name        = "${var.user-id}-iam-policy"
-      role = var.user-id
+      role = var.cmdb-role
     }
   }
 }
