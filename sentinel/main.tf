@@ -28,7 +28,7 @@ locals {
   session = timeadd(timestamp(), join("",[var.duration, "h"]))
   cac_account = "851725357209"
 }
-#
+
 data "aws_iam_policy_document" "cac-policy" {
   statement {
     sid = "1"
